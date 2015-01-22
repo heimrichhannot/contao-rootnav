@@ -1,0 +1,32 @@
+{
+    "name": "heimrichhannot/contao-rootnav",
+    "description":"Root navigation for contao, working best in multi domain setup.",
+    "keywords":["contao", "navigation", "root", "multi-domain"],
+    "type": "contao-module",
+    "homepage":"https://github.com/heimrichhannot/contao-rootnav",
+    "license":"LGPL-3.0+",
+    "authors":[
+        {
+            "name":"Heimrich & Hannot",
+            "email":"digitales@heimrich-hannot.de",
+            "homepage":"http://www.heimrich-hannot.de",
+            "role":"Developer"
+        }
+    ],
+    "support":{
+        "issues":"https://github.com/heimrichhannot/contao-rootnav/issues"
+    },
+    "require": {
+        "contao/core": ">=3.0,<4-dev"
+    },
+    "autoload": {
+        "classmap": [""]
+    },
+    "extra": {
+        "contao": {
+            "sources": {
+                "": "system/modules/rootnav"
+            }
+        }
+    }
+}
