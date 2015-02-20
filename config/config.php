@@ -9,5 +9,5 @@ $GLOBALS['FE_MOD']['navigationMenu']['rootnav'] = 'HeimrichHannot\Rootnav\Module
  * Javascript
  */
 if (TL_MODE == 'FE') {
-	$GLOBALS['TL_JAVASCRIPT']['rootnav'] = '/system/modules/rootnav/assets/js/rootnav.js|static';
+	$GLOBALS['TL_JAVASCRIPT']['rootnav'] = '/system/modules/rootnav/assets/js/jquery.rootnav.js|static';
 }
