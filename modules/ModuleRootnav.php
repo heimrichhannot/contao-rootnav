@@ -100,6 +100,7 @@ class ModuleRootnav extends \ModuleCustomnav
 				$href = '';
 				$href .= isset($arrHref['scheme']) ? $arrHref['scheme'] . '://' : '';
 				$href .= isset($arrHref['host']) ? $arrHref['host'] : '';
+				$href .= isset($arrHref['port']) ? ':' . $arrHref['port'] : '';
 				$href .= isset($arrHref['path']) ? $arrHref['path'] : '';
 
 				$trail = in_array($arrPage['id'], $objPage->trail);

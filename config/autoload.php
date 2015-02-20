@@ -31,3 +31,12 @@ ClassLoader::addClasses(array
 	// Modules
 	'HeimrichHannot\Rootnav\ModuleRootnav'    => 'system/modules/rootnav/modules/ModuleRootnav.php',
 ));
+
+
+/**
+ * Register the templates
+ */
+TemplateLoader::addFiles(array
+(
+	'nav_navbar_root' => 'system/modules/rootnav/templates/nav',
+));
