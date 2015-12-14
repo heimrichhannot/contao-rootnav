@@ -22,7 +22,7 @@ class PageModelRootnav extends \PageModel
 	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no pages
 	 */
-	public static function findPublishedRootByIds($arrIds, array $arrOptions=array())
+	public static function findPublishedWithRootByIds($arrIds, array $arrOptions=array())
 	{
 		if (!is_array($arrIds) || empty($arrIds))
 		{
@@ -30,7 +30,7 @@ class PageModelRootnav extends \PageModel
 		}
 
 		$t = static::$strTable;
-		$arrColumns = array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ") AND $t.type='root'");
+		$arrColumns = array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ") AND $t.type!='error_403' AND $t.type!='error_404'");
 
 
 		if (!BE_USER_LOGGED_IN)

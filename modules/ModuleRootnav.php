@@ -31,7 +31,7 @@ class ModuleRootnav extends \ModuleCustomnav
 		}
 
 		// Get all active pages
-		$objPages = PageModelRootnav::findPublishedRootByIds($this->pages);
+		$objPages = PageModelRootnav::findPublishedWithRootByIds($this->pages);
 
 		// Return if there are no pages
 		if ($objPages === null)
@@ -85,24 +85,28 @@ class ModuleRootnav extends \ModuleCustomnav
 			{
 
 				// Get href
-				$href = $this->generateFrontendUrl($arrPage, null, $arrPage['rootLanguage'], true);
-
+				$href = \Controller::generateFrontendUrl($arrPage, null, $arrPage['rootLanguage'], true);
+				
+				
 				// Remove root page alias from href
-				$arrHref = parse_url($href);
-				$arrHref['path'] = str_replace($arrPage['alias'], '', $arrHref['path']);
-
-				if(substr($arrHref['path'], 0, 1) !== '/')
+				if($arrPage['type'] == 'root')
 				{
-					$arrHref['path'] = '/' . $arrHref['path'];
+					$arrHref = parse_url($href);
+					$arrHref['path'] = str_replace($arrPage['alias'], '', $arrHref['path']);
+
+					if(substr($arrHref['path'], 0, 1) !== '/')
+					{
+						$arrHref['path'] = '/' . $arrHref['path'];
+					}
+
+					// build url without root page alias
+					$href = '';
+					$href .= isset($arrHref['scheme']) ? $arrHref['scheme'] . '://' : '';
+					$href .= isset($arrHref['host']) ? $arrHref['host'] : '';
+					$href .= isset($arrHref['port']) ? ':' . $arrHref['port'] : '';
+					$href .= isset($arrHref['path']) ? $arrHref['path'] : '';
 				}
-
-				// build url without root page alias
-				$href = '';
-				$href .= isset($arrHref['scheme']) ? $arrHref['scheme'] . '://' : '';
-				$href .= isset($arrHref['host']) ? $arrHref['host'] : '';
-				$href .= isset($arrHref['port']) ? ':' . $arrHref['port'] : '';
-				$href .= isset($arrHref['path']) ? $arrHref['path'] : '';
-
+				
 				$trail = in_array($arrPage['id'], $objPage->trail);
 
 				$strClass = trim($arrPage['cssClass'] . ($trail ? ' trail' : ''));
