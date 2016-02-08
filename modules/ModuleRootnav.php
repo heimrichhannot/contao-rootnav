@@ -70,6 +70,8 @@ class ModuleRootnav extends \ModuleCustomnav
 		$objTemplate->cssID = $this->cssID; // see #4897 and 6129
 		$objTemplate->level = 'level_1';
 
+		$arrTargetPages = deserialize($this->pageTargets, true);
+
 		foreach ($arrPages as $arrPage)
 		{
 			// Skip hidden pages (see #5832)
@@ -123,8 +125,11 @@ class ModuleRootnav extends \ModuleCustomnav
 				$row['target'] = '';
 				$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $arrPage['description']);
 
+				$defineTarget = $arrPage['type'] == 'redirect' && $arrPage['target'];
+				$defineTarget = $this->defineTarget && in_array($arrPage['id'], $arrTargetPages);
+
 				// Override the link target
-				if ($arrPage['type'] == 'redirect' && $arrPage['target'])
+				if ($defineTarget)
 				{
 					$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
 				}
